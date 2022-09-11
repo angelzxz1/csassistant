@@ -99,6 +99,9 @@ const NavBar = (props) => {
           <LinkItem href="/jiras" path={path}>
             Jiras
           </LinkItem>
+          <LinkItem href="/wiki" path={path}>
+            Wiki
+          </LinkItem>
         </Stack>
         <Box flex={1} align="right">
           <ThemeToggleButton />
@@ -119,6 +122,9 @@ const NavBar = (props) => {
                 </NextLink>
                 <NextLink href="/jiras" passHref>
                   <MenuItem as={Link}>Jiras</MenuItem>
+                </NextLink>
+                <NextLink href="/wiki" passHref>
+                  <MenuItem as={Link}>Wiki</MenuItem>
                 </NextLink>
               </MenuList>
             </Menu>

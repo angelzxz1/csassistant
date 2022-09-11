@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { callflow, warnings, notes } from "../lib/notes";
 
-const Page = () => {
+const Templates = () => {
 	const style = {
 		border: "1px",
 		p: 3,
@@ -81,4 +81,4 @@ const Page = () => {
 		</Grid>
 	);
 };
-export default Page;
+export default Templates;

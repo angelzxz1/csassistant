@@ -82,7 +82,7 @@ const Note = () => {
   );
 };
 
-const Page = (props) => {
+const Home = (props) => {
   return (
     <Flex>
       <Note />
@@ -90,4 +90,4 @@ const Page = (props) => {
   );
 };
 
-export default Page;
+export default Home;
