@@ -7,7 +7,7 @@ const WebSite = (props) => {
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
-      <Main router={router}>
+      <Main router={router} name={Component.name}>
         <Component {...pageProps} />
       </Main>
     </ChakraProvider>
