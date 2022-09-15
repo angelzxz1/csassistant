@@ -7,7 +7,7 @@ import {
   Image,
   Link,
   color,
-  Button
+  Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import notes from "../lib/notes";
@@ -89,5 +89,5 @@ const Home = (props) => {
     </Flex>
   );
 };
-
+Home.tittle = "Home";
 export default Home;
