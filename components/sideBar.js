@@ -54,15 +54,15 @@ const Note = () => {
         </Flex>
         <Flex w="100%" justify="space-evenly" direction="column">
           <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href=" Insert http link" target="_blank"><b> insert CHO-Number</a></b></b>\n<b>Ticket ID</b>:`}
+            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n<b>Ticket ID</b>:`}
             label="Email"
           />
           <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href=" Insert http link" target="_blank"><b> insert CHO-Number</a></b></b>\n<b>Chat ID</b>:`}
+            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n<b>Chat ID</b>:`}
             label="Chat"
           />
           <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href=" Insert http link" target="_blank"><b> insert CHO-Number</a></b></b>\n<b>Phone Number</b>:`}
+            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n<b>Phone Number</b>:`}
             label="Call"
           />
           <Input
