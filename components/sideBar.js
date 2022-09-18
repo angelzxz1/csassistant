@@ -93,8 +93,18 @@ const Note = () => {
 };
 
 const SideBar = props => {
+	const { display, w, ...rest } = props;
+	console.log(display);
 	return (
-		<Box mt={14} position="absolute" w="20%">
+		<Box
+			mt={14}
+			position={{
+				base: "",
+				lg: "absolute",
+			}}
+			display={display}
+			w={w}
+		>
 			<Note />
 		</Box>
 	);
