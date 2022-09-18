@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { callflow, warnings, notes } from "../lib/notes";
 
-const Templates = () => {
+const Home = () => {
 	const style = {
 		border: "1px",
 		p: 3,
@@ -82,5 +82,5 @@ const Templates = () => {
 	);
 };
 
-Templates.tittle = "Home";
-export default Templates;
+Home.tittle = "Home";
+export default Home;
