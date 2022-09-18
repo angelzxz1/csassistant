@@ -1,93 +1,86 @@
 import {
-  Box,
-  Flex,
-  Container,
-  Heading,
-  useColorModeValue,
-  Image,
-  Link,
-  color,
-  Button,
+	Flex,
+	// Box,
+	// Stack,
+	// Container,
+	Button,
+	Grid,
+	GridItem,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import notes from "../lib/notes";
-import Section from "../components/section";
+import { callflow, warnings, notes } from "../lib/notes";
 
-const NoteButton = ({ text, label }) => {
-  const [message, setMessage] = useState("");
-  const componentDidUpdate = () => {
-    setMessage("Coppied!");
-    setTimeout(() => setMessage(""), 3000);
-  };
-  return (
-    <Flex direction="column">
-      <Button
-        onClick={() => {
-          navigator.clipboard.writeText(text);
-          componentDidUpdate();
-        }}
-        colorScheme={useColorModeValue("teal", "blue")}
-      >
-        {label}
-      </Button>
-      <Flex w="100%" justify="center" pt={5}>
-        {message}
-      </Flex>
-    </Flex>
-  );
+const Templates = () => {
+	const style = {
+		border: "1px",
+		p: 3,
+		m: 1,
+		borderRadius: "10px",
+	};
+	return (
+		<Grid
+			templateColumns="1fr 2fr"
+			templateRows="1fr 1fr 1fr"
+			templateAreas={`"callflow warnings "
+		"callflow other"
+		"callflow ."`}
+		>
+			<GridItem gridArea="callflow" {...style}>
+				<Flex w="100%" justify="center">
+					Call flow
+				</Flex>
+				{callflow.map((item, i) => {
+					return (
+						<Button
+							key={i}
+							m={1}
+							onClick={() => {
+								navigator.clipboard.writeText(item.note);
+							}}
+						>
+							{item.name}
+						</Button>
+					);
+				})}
+			</GridItem>
+			<GridItem gridArea="warnings" {...style}>
+				<Flex w="100%" justify="center">
+					Warnings
+				</Flex>
+				{warnings.map((item, i) => {
+					return (
+						<Button
+							key={i}
+							m={1}
+							onClick={() => {
+								navigator.clipboard.writeText(item.note);
+							}}
+						>
+							{item.name}
+						</Button>
+					);
+				})}
+			</GridItem>
+			<GridItem gridArea="other" {...style}>
+				<Flex w="100%" justify="center">
+					Other
+				</Flex>
+				{notes.map((item, i) => {
+					return (
+						<Button
+							key={i}
+							m={1}
+							onClick={() => {
+								navigator.clipboard.writeText(item.note);
+							}}
+						>
+							{item.name}
+						</Button>
+					);
+				})}
+			</GridItem>
+		</Grid>
+	);
 };
 
-const Note = () => {
-  return (
-    <Flex w="100%" direction="column" fontSize={14}>
-      <Flex w="100%" direction="column" pt={14}>
-        <Flex w="100%" justify="center" pb={5}>
-          Internal Notes
-        </Flex>
-        <Flex w="100%" justify="space-evenly">
-          <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<b>Ticket ID</b>:`}
-            label="Email"
-          />
-          <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<b>Chat ID</b>:`}
-            label="Chat"
-          />
-          <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<b>Phone Number</b>:`}
-            label="Call"
-          />
-        </Flex>
-      </Flex>
-      <Flex w="100%" direction="column" pt={14}>
-        <Flex w="100%" justify="center" pb={5}>
-          Internal Notes with escalation
-        </Flex>
-        <Flex w="100%" justify="space-evenly">
-          <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href=" Insert http link" target="_blank"><b> insert CHO-Number</a></b></b>\n<b>Ticket ID</b>:`}
-            label="Email"
-          />
-          <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href=" Insert http link" target="_blank"><b> insert CHO-Number</a></b></b>\n<b>Chat ID</b>:`}
-            label="Chat"
-          />
-          <NoteButton
-            text={`<b>Player Inquiry</b>:\n<b>Resolution</b>:\n<a href=" Insert http link" target="_blank"><b> insert CHO-Number</a></b></b>\n<b>Phone Number</b>:`}
-            label="Call"
-          />
-        </Flex>
-      </Flex>
-    </Flex>
-  );
-};
-
-const Home = (props) => {
-  return (
-    <Flex>
-      <Note />
-    </Flex>
-  );
-};
-Home.tittle = "Home";
-export default Home;
+Templates.tittle = "Home";
+export default Templates;
