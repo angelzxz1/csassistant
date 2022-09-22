@@ -1,1 +1,2 @@
 https://www.kindacode.com/article/next-js-reading-and-display-data-from-a-local-json-file/
+https://vercel.com/guides/loading-static-file-nextjs-api-route
