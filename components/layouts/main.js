@@ -3,14 +3,14 @@ import NavBar from "../navBar";
 import SideBar from "../sideBar";
 import { Box, Container, Grid, GridItem } from "@chakra-ui/react";
 const Main = (props) => {
-  const { children, router, title } = props;
+  const { children, router, tittle } = props;
   return (
     <Box as="main" pb={8}>
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-        <title>{title}</title>
+        <title>{tittle}</title>
       </Head>
       <NavBar path={router.asPath} />
       <SideBar pt={14} display={{ base: "none", lg: "block" }} w="20%" />
