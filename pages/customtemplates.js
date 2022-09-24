@@ -47,7 +47,7 @@ const CustomTemplates = () => {
 	return (
 		<Grid
 			templateColumns="1fr 1fr"
-			templateRows="10% 1fr"
+			templateRows="1fr 3fr"
 			templateAreas={`"searchbar searchbar"
       "left right"`}
 		>
