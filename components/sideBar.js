@@ -1,7 +1,14 @@
-import { Box, Flex, useColorModeValue, Button, Input } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  useColorModeValue,
+  Button,
+  Input,
+  Checkbox,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
-const NoteButton = ({ text, label }) => {
+const NoteButton = ({ text, label, uncheck }) => {
   const [message, setMessage] = useState("");
   const componentDidUpdate = () => {
     setMessage("Coppied!");
@@ -12,6 +19,7 @@ const NoteButton = ({ text, label }) => {
       <Button
         onClick={() => {
           navigator.clipboard.writeText(text);
+          uncheck(false);
           componentDidUpdate();
         }}
         colorScheme={useColorModeValue("teal", "blue")}
@@ -24,9 +32,11 @@ const NoteButton = ({ text, label }) => {
     </Flex>
   );
 };
+
 const Note = () => {
   const [escLink, setEscLink] = useState("");
   const [choNumber, setChoNumber] = useState("");
+  const [isEscalated, setIsEscalated] = useState(false);
   return (
     <Flex w="100%" direction="column" fontSize={14}>
       <Flex w="100%" direction="column" pt={1}>
@@ -35,43 +45,54 @@ const Note = () => {
         </Flex>
         <Flex w="100%" direction="column" justify="space-evenly">
           <NoteButton
-            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n<b>Ticket ID</b>: `}
+            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n${
+              isEscalated
+                ? `<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n`
+                : ""
+            }<b>Ticket ID</b>: `}
             label="Email"
+            uncheck={setIsEscalated}
           />
           <NoteButton
-            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n<b>Chat ID</b>: `}
+            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n${
+              isEscalated
+                ? `<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n`
+                : ""
+            }<b>Chat ID</b>: `}
             label="Chat"
+            uncheck={setIsEscalated}
           />
           <NoteButton
-            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n<b>Phone Number</b>: `}
+            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n${
+              isEscalated
+                ? `<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n`
+                : ""
+            }<b>Phone Number</b>: `}
             label="Call"
+            uncheck={setIsEscalated}
           />
         </Flex>
       </Flex>
       <Flex w="100%" direction="column" pt={5}>
         <Flex w="100%" justify="center" pb={5}>
-          Internal Notes with escalation
+          Notes with escalation?
+          <Checkbox
+            ml={3}
+            isChecked={isEscalated}
+            onChange={() => {
+              setIsEscalated((prev) => !prev);
+              console.log(isEscalated);
+            }}
+          />
         </Flex>
         <Flex w="100%" justify="space-evenly" direction="column">
-          <NoteButton
-            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n<b>Ticket ID</b>: `}
-            label="Email"
-          />
-          <NoteButton
-            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n<b>Chat ID</b>: `}
-            label="Chat"
-          />
-          <NoteButton
-            text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n<b>Phone Number</b>: `}
-            label="Call"
-          />
           <Flex justify="center">CHO link</Flex>
           <Input
             value={escLink}
             borderColor={useColorModeValue("teal", "blue.100")}
-            color={useColorModeValue("teal", "blue.100")}
             placeholder="Paste the CHO link here"
             mt={1}
+            isDisabled={!isEscalated}
             onChange={(e) => {
               setEscLink(e.target.value);
             }}
@@ -82,6 +103,7 @@ const Note = () => {
             borderColor={useColorModeValue("teal", "blue.100")}
             placeholder="Paste the CHO number here"
             mt={2}
+            isDisabled={!isEscalated}
             onChange={(e) => {
               setChoNumber(e.target.value);
             }}

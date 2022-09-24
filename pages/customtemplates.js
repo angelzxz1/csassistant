@@ -64,6 +64,6 @@ const CustomTemplates = () => {
 		</Grid>
 	);
 };
-CustomTemplates.title = "Custom Templates";
+CustomTemplates.tittle = "Custom Templates";
 
 export default CustomTemplates;
