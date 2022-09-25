@@ -8,16 +8,17 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import GenModal from "../components/modal";
 import axios from "axios";
 const SearchBar = ({ gridArea, srch, data }) => {
   return (
     <Grid
       gridArea={gridArea}
       m={1}
-      templateColumns="5fr 1fr"
+      templateColumns="4fr 1fr 1fr"
       templateRows="1fr"
       gap={2}
-      templateAreas={`"impField searchButton"`}
+      templateAreas={`"impField searchButton addButton"`}
     >
       <Input
         type="text"
@@ -30,27 +31,51 @@ const SearchBar = ({ gridArea, srch, data }) => {
       <Button
         gridArea="searchButton"
         onClick={async () => {
-          try {
-            const response = await axios.post("/api", {
-              name: srch.searchTerm,
-            });
-          } catch (err) {
-            alert(err.response.data.message);
+          if (srch.searchTerm !== "") {
+            try {
+              const response = await axios.post("/api", {
+                action: "search",
+                name: srch.searchTerm,
+              });
+            } catch (err) {
+              alert(err.response.data.message);
+            }
           }
-
-          //   console.log(response);
           //   data.setData(response.data);
         }}
       >
         Search
       </Button>
+      <GenModal
+        Tittle="Add agent"
+        gridArea="addButton"
+        Action="Add"
+        onClick={async () => {
+          if (srch.searchTerm !== "") {
+            try {
+              const response = await axios.post("/api", {
+                action: "add",
+                name: srch.searchTerm,
+              });
+            } catch (err) {
+              alert(err.response.data.message);
+            }
+          }
+
+          //   data.setData(response.data);
+        }}
+      />
     </Grid>
   );
 };
 
 const CustomTemplates = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState();
+  const [data, setData] = useState({
+    searched: undefined,
+    updated: undefined,
+    added: undefined,
+  });
 
   const columnas = {
     colSpan: 1,
@@ -63,7 +88,7 @@ const CustomTemplates = () => {
   return (
     <Grid
       templateColumns="1fr 1fr"
-      templateRows="1fr 3fr"
+      templateRows="1fr 1fr"
       templateAreas={`"searchbar searchbar"
       "left right"`}
     >
@@ -72,12 +97,22 @@ const CustomTemplates = () => {
         srch={{ searchTerm, setSearchTerm }}
         data={{ data, setData }}
       />
-      <GridItem gridArea="left" {...columnas}>
-        left
-      </GridItem>
-      <GridItem gridArea="right" {...columnas}>
-        right
-      </GridItem>
+      {data.searched ? (
+        <>
+          <GridItem gridArea="left" {...columnas}>
+            <Stack>
+              {data.searched.list.map((item) => (
+                <></>
+              ))}
+            </Stack>
+          </GridItem>
+          <GridItem gridArea="right" {...columnas}>
+            right
+          </GridItem>
+        </>
+      ) : (
+        <></>
+      )}
     </Grid>
   );
 };
