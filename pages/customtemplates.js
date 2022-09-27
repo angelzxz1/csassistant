@@ -9,8 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import GenModal from "../components/modal";
+import Loading from "../components/loading";
 import axios from "axios";
-const SearchBar = ({ gridArea, srch, data }) => {
+const SearchBar = ({ gridArea, srch, data, setIsLoading }) => {
   return (
     <Grid
       gridArea={gridArea}
@@ -31,6 +32,7 @@ const SearchBar = ({ gridArea, srch, data }) => {
       <Button
         gridArea="searchButton"
         onClick={async () => {
+          setIsLoading(true);
           if (srch.searchTerm !== "") {
             try {
               const response = await axios.post("/api", {
@@ -41,6 +43,8 @@ const SearchBar = ({ gridArea, srch, data }) => {
               alert(err.response.data.message);
             }
           }
+          srch.setSearchTerm("");
+          setIsLoading(false);
           //   data.setData(response.data);
         }}
       >
@@ -50,7 +54,7 @@ const SearchBar = ({ gridArea, srch, data }) => {
         Tittle="Add agent"
         gridArea="addButton"
         Action="Add"
-        onClick={async () => {
+        onClick={async (value) => {
           if (srch.searchTerm !== "") {
             try {
               const response = await axios.post("/api", {
@@ -71,6 +75,7 @@ const SearchBar = ({ gridArea, srch, data }) => {
 
 const CustomTemplates = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     searched: undefined,
     updated: undefined,
@@ -96,6 +101,7 @@ const CustomTemplates = () => {
         gridArea="searchbar"
         srch={{ searchTerm, setSearchTerm }}
         data={{ data, setData }}
+        setIsLoading={setIsLoading}
       />
       {data.searched ? (
         <>
@@ -110,6 +116,8 @@ const CustomTemplates = () => {
             right
           </GridItem>
         </>
+      ) : isLoading ? (
+        <Loading />
       ) : (
         <></>
       )}
