@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-const NoteButton = ({ text, label, uncheck }) => {
+const NoteButton = ({ text, label, uncheck, cho }) => {
   const [message, setMessage] = useState("");
   const componentDidUpdate = () => {
     setMessage("Coppied!");
@@ -21,6 +21,8 @@ const NoteButton = ({ text, label, uncheck }) => {
           navigator.clipboard.writeText(text);
           uncheck(false);
           componentDidUpdate();
+          cho.setEscLink("");
+          cho.setChoNumber("");
         }}
         colorScheme={useColorModeValue("teal", "blue")}
       >
@@ -37,6 +39,7 @@ const Note = () => {
   const [escLink, setEscLink] = useState("");
   const [choNumber, setChoNumber] = useState("");
   const [isEscalated, setIsEscalated] = useState(false);
+  const cho = { setEscLink, setChoNumber };
   return (
     <Flex w="100%" direction="column" fontSize={14}>
       <Flex w="100%" direction="column" pt={1}>
@@ -45,6 +48,7 @@ const Note = () => {
         </Flex>
         <Flex w="100%" direction="column" justify="space-evenly">
           <NoteButton
+            cho={cho}
             text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n${
               isEscalated
                 ? `<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n`
@@ -54,6 +58,7 @@ const Note = () => {
             uncheck={setIsEscalated}
           />
           <NoteButton
+            cho={cho}
             text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n${
               isEscalated
                 ? `<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n`
@@ -63,6 +68,7 @@ const Note = () => {
             uncheck={setIsEscalated}
           />
           <NoteButton
+            cho={cho}
             text={`<b>Player Inquiry</b>: \n<b>Resolution</b>: \n${
               isEscalated
                 ? `<a href="${escLink}" target="_blank"><b>${choNumber}</a></b></b>\n`
@@ -81,7 +87,6 @@ const Note = () => {
             isChecked={isEscalated}
             onChange={() => {
               setIsEscalated((prev) => !prev);
-              console.log(isEscalated);
             }}
           />
         </Flex>
