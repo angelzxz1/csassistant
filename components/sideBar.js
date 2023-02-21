@@ -122,7 +122,6 @@ const Note = () => {
 const SideBar = (props) => {
     const { display, w, ...rest } = props;
     const [toggleShow, setToggleShow] = useState(0);
-    console.log(w);
     return (
         <Box
             mt={14}
