@@ -11,15 +11,19 @@
   "author": "Angel Zuñiga <angel.zuna@icloud.com>",
   "license": "MIT",
   "dependencies": {
-    "@chakra-ui/icons": "^2.0.6",
-    "@chakra-ui/react": "^2.2.6",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "framer-motion": "^7.0.0",
-    "next": "^12.2.4",
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/next-js": "^2.0.1",
+    "@chakra-ui/react": "^2.5.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "axios": "0.27.2",
+    "framer-motion": "^7.10.3",
+    "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0",
-    "axios": "0.27.2"
+    "react-icons": "^4.8.0"
+  },
+  "devDependencies": {
+    "eslint-config-next": "^13.2.4"
   }
 }
