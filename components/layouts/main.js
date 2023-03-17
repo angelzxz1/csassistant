@@ -20,7 +20,7 @@ const Main = (props) => {
                 />
                 <title>Notes</title>
             </Head>
-            {/* <NavBar path={router.asPath} /> */}
+            <NavBar />
             <SideBar pt={14} display={{ base: "none", lg: "block" }} w="20%" />
             <Container maxW="container.md" pt={14}>
                 <Grid

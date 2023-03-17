@@ -2,8 +2,10 @@
 
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
+import { Suspense } from "react";
 import Main from "../components/layouts/main";
 import theme from "../lib/theme.js";
+import Loading from "./loading";
 export default function RootLayout(props) {
     const { children } = props;
 
@@ -13,7 +15,9 @@ export default function RootLayout(props) {
             <body>
                 <CacheProvider>
                     <ChakraProvider theme={theme}>
-                        <Main>{children}</Main>
+                        <Suspense fallback={Loading}>
+                            <Main>{children}</Main>
+                        </Suspense>
                     </ChakraProvider>
                 </CacheProvider>
             </body>

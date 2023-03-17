@@ -12,7 +12,6 @@ import {
 import { callflow, warnings, notes } from "../lib/notes";
 
 const Page = (props) => {
-    console.log(props);
     const style = {
         border: "1px",
         p: 3,
