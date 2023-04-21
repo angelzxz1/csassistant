@@ -7,7 +7,7 @@ import {
     Grid,
     GridItem,
 } from "@chakra-ui/react";
-import { callflow, warnings, notes } from "../lib/notes";
+import { callflow, warnings, notes, passwords } from "../lib/notes";
 
 const Home = () => {
     const style = {
@@ -20,10 +20,7 @@ const Home = () => {
         <Grid
             templateColumns="1fr 2fr"
             templateRows="1fr 1fr 1fr 1fr"
-            templateAreas={`"callflow warnings"
-      "callflow other"
-		  "callflow other"
-		  "callflow ."`}
+            templateAreas={`"callflow warnings" "callflow other" "callflow other" "callflow passwords"`}
         >
             <GridItem gridArea="callflow" {...style}>
                 <Flex w="100%" justify="center">
@@ -66,6 +63,24 @@ const Home = () => {
                     Other
                 </Flex>
                 {notes.map((item, i) => {
+                    return (
+                        <Button
+                            key={i}
+                            m={1}
+                            onClick={() => {
+                                navigator.clipboard.writeText(item.note);
+                            }}
+                        >
+                            {item.name}
+                        </Button>
+                    );
+                })}
+            </GridItem>
+            <GridItem gridArea="passwords" {...style}>
+                <Flex w="100%" justify="center">
+                    Passwords
+                </Flex>
+                {passwords.map((item, i) => {
                     return (
                         <Button
                             key={i}
