@@ -7,7 +7,7 @@ import {
     Grid,
     GridItem,
   } from "@chakra-ui/react";
-  import { callflow, warnings, notes, passwords } from "../lib/notes.js";
+  import { callflow, warnings, notes, passwords } from "../../lib/notes.js";
   
   const Home = () => {
     const style = {
